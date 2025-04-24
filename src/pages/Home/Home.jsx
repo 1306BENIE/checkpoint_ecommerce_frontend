@@ -27,7 +27,7 @@ const Home = () => {
 
     // Crée un intervalle pour faire clignoter uniquement le texte
     const interval = setInterval(() => {
-      setIsVisible((prevState) => !prevState); // Alterne la visibilité
+      setIsVisible((prevState) => !prevState);
     }, 1000);
     // Nettoyage de l'intervalle lors du démontage du composant
     return () => clearInterval(interval);

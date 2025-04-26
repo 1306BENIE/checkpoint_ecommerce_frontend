@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -109,9 +109,9 @@ export default function Signup() {
 
         <p className="text-center mt-4 text-gray-500">
           Vous avez déjà un compte ?{" "}
-          <a href="/login" className="text-indigo-600 hover:text-indigo-700">
+          <Link to="/login" className="text-indigo-600 hover:text-indigo-700">
             Connectez-vous ici.
-          </a>
+          </Link>
         </p>
       </div>
     </div>

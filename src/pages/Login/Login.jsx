@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -10,7 +10,6 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Vérifier les informations d'identification
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
       setError("Aucun utilisateur trouvé. Veuillez vous inscrire.");
@@ -18,8 +17,7 @@ export default function Login() {
     }
 
     if (email === user.email && password === user.password) {
-      // Connexion réussie, rediriger l'utilisateur
-      navigate("/"); // ou vers la page d'accueil ou le tableau de bord
+      navigate("/"); // Redirection après connexion réussie
     } else {
       setError("Email ou mot de passe incorrect.");
     }
@@ -30,7 +28,6 @@ export default function Login() {
       <div className="bg-white p-8 rounded-lg shadow-md w-80">
         <h2 className="text-2xl font-bold text-center mb-6">Connexion</h2>
 
-        {/* Affichage des erreurs */}
         {error && <div className="text-red-500 text-center mb-4">{error}</div>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -79,9 +76,12 @@ export default function Login() {
 
         <p className="text-center mt-4 text-gray-500">
           Vous n'avez pas de compte ?{" "}
-          <a href="/register" className="text-indigo-600 hover:text-indigo-700">
+          <Link
+            to="/register"
+            className="text-indigo-600 hover:text-indigo-700"
+          >
             Inscrivez-vous ici
-          </a>
+          </Link>
         </p>
       </div>
     </div>

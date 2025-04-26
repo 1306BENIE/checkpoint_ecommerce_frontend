@@ -9,6 +9,9 @@ import {
   Confirmation,
   Success,
   Cancel,
+  SearchResults,
+  Login,
+  Register,
 } from "../../pages";
 import { Navbar, Footer } from "../../components";
 
@@ -25,6 +28,9 @@ const AppRoutes = () => {
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/success" element={<Success />} />
         <Route path="/cancel" element={<Cancel />} />
+        <Route path="/search" element={<SearchResults />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
       <Footer />
     </Router>

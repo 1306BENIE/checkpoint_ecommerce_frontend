@@ -7,3 +7,5 @@ export * from "./Confirmation";
 export * from "./Success";
 export * from "./Cancel";
 export * from "./Login";
+export * from "./SearchResults";
+export * from "./Register";

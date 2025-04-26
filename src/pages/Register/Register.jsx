@@ -1,34 +1,45 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Vérifier les informations d'identification
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (!user) {
-      setError("Aucun utilisateur trouvé. Veuillez vous inscrire.");
+    // Vérifier si les mots de passe correspondent
+    if (password !== confirmPassword) {
+      setError("Les mots de passe ne correspondent pas.");
       return;
     }
 
-    if (email === user.email && password === user.password) {
-      // Connexion réussie, rediriger l'utilisateur
-      navigate("/"); // ou vers la page d'accueil ou le tableau de bord
+    // Vérifier si un utilisateur est déjà enregistré
+    const existingUser = localStorage.getItem("user");
+    if (existingUser) {
+      setError("Un utilisateur est déjà enregistré.");
+      return;
+    }
+
+    // Simuler l'enregistrement (remplace cette partie par une vraie API si nécessaire)
+    if (email && password) {
+      const user = { email, password };
+      localStorage.setItem("user", JSON.stringify(user)); // Enregistrer l'utilisateur dans localStorage
+
+      // Redirection vers la page de connexion ou d'accueil
+      navigate("/login");
     } else {
-      setError("Email ou mot de passe incorrect.");
+      setError("Veuillez remplir tous les champs.");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-80">
-        <h2 className="text-2xl font-bold text-center mb-6">Connexion</h2>
+        <h2 className="text-2xl font-bold text-center mb-6">Créer un compte</h2>
 
         {/* Affichage des erreurs */}
         {error && <div className="text-red-500 text-center mb-4">{error}</div>}
@@ -69,18 +80,37 @@ export default function Login() {
             />
           </div>
 
+          <div>
+            <label
+              htmlFor="confirmPassword"
+              className="block text-gray-700 font-medium"
+            >
+              Confirmer le mot de passe
+            </label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              required
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded-md mt-2"
+              placeholder="Confirmez votre mot de passe"
+            />
+          </div>
+
           <button
             type="submit"
             className="w-full bg-[#7167df] text-white p-2 rounded-md mt-4 hover:bg-indigo-700/50"
           >
-            Se connecter
+            S'inscrire
           </button>
         </form>
 
         <p className="text-center mt-4 text-gray-500">
-          Vous n'avez pas de compte ?{" "}
-          <a href="/register" className="text-indigo-600 hover:text-indigo-700">
-            Inscrivez-vous ici
+          Vous avez déjà un compte ?{" "}
+          <a href="/login" className="text-indigo-600 hover:text-indigo-700">
+            Connectez-vous ici.
           </a>
         </p>
       </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ProductCard } from "../../components"; // temporaire avant backend
+import { ProductCard } from "../../components";
 import { fetchAllProducts } from "../../api/productApi";
 
 const Home = () => {
